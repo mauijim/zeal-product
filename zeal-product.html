@@ -1,0 +1,250 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-media-query/iron-media-query.html">
+
+<link rel="import" href="../zeal-styles/zeal-typography.html">
+<link rel="import" href="../zeal-styles/zeal-color.html">
+<link rel="import" href="../zeal-button/zeal-button.html">
+<!-- <link rel="import" href="../zeal-styles/zeal-theme.html"> -->
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <zeal-product></zeal-product>
+
+@group Seed Elements
+@element zeal-product
+@demo demo/index.html
+@hero hero.svg
+-->
+<dom-module id="zeal-product">
+
+  <template>
+    <style is="custom-style">
+      :host {
+
+        display: block;
+        box-sizing: border-box;
+        color: var(--zeal-color-charcoal, #333333);
+
+        --zeal-product-image-background-color: var(--zeal-color-night, #252525);
+        --zeal-product-pricing-now-color: var(--zeal-color-blood-orange, #cc3300);
+
+        --zeal-product-name: {
+          @apply(--zeal-font-headline-4);
+          @apply(--zeal-font-title);
+        };
+
+        --zeal-product-pricing-text: {
+          @apply(--zeal-font-body);
+          margin: 0;
+          text-transform: uppercase;
+        };
+      }
+
+      .image {
+        width:100%;
+        margin-bottom: 1em;
+        @apply(--zeal-product-container);
+      }
+
+      .container{
+        margin:0;
+        padding:0.9375em;
+        @apply(--zeal-product-container);
+      }
+
+      .content{
+        background-color: #fff;
+        text-align: center;
+        margin:0;
+        padding:0;
+        @apply(--zeal-product-content);
+      }
+
+      .name {
+        @apply(--zeal-product-name);
+      }
+
+      .pricing {
+        margin-bottom: 0.625em;
+        @apply(--zeal-product-pricing);
+      }
+
+      .pricing p, .pricing .was, .pricing .now{
+        @apply(--zeal-product-pricing-text);
+      }
+
+      .pricing .now{
+        color: var(--zeal-product-pricing-now-color, #cc3300);
+      }
+
+      zeal-button {
+        margin-bottom:0;
+      }
+    </style>
+
+    <iron-media-query query="(min-width: 0)" query-matches="{{small}}"></iron-media-query>
+    <iron-media-query query="(min-width: 640px)" query-matches="{{medium}}"></iron-media-query>
+    <iron-media-query query="(min-width: 1024px)" query-matches="{{large}}"></iron-media-query>
+    <iron-media-query query="(min-width: 1200px)" query-matches="{{xlarge}}"></iron-media-query>
+    <iron-media-query query="(min-width: 1440px)" query-matches="{{xxlarge}}"></iron-media-query>
+
+    <div
+      class="container"
+      small-layout$="{{small}}"
+      medium-layout$="{{medium}}"
+      large-layout$="{{large}}"
+      xlarge-layout$="{{xlarge}}"
+      xxlarge-layout$="{{xxlarge}}">
+
+      <div class="content">
+        <div class="header">
+          <img class="image" src="{{image}}">
+          <!-- TODO: Add alt views -->
+        </div>
+        <h3 class="name">{{name}}</h3>
+        <div class="pricing">
+          <p class="was">Was: ${{msrp}}</p>
+          <p class="now">Now: ${{price}}</p>
+        </div>
+        <!-- TODO: Add color swatches -->
+        <!-- TODO: Add quickview -->
+        <div class="actions">
+          <zeal-button link$="{{link}}" primary>Shop Now</zeal-button>
+        </div>
+      </div>
+
+    </div>
+
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'zeal-product',
+
+    properties: {
+
+      /**
+       * A product image to display
+       */
+      image: {
+        type: String,
+        value: 'https://zealoptics.firebaseapp.com/images/10458-665Wx261H.jpeg',
+        notify: true
+      },
+
+      /**
+       * The products display name
+       */
+      name: {
+        type: String,
+        value: 'Eclipse',
+        notify: true
+      },
+
+      /**
+       * current retail price
+       */
+      price: {
+        type: Number,
+        value: 159.00,
+        notify: true
+      },
+
+      /**
+       * the suggested retail price
+       */
+      msrp: {
+        type: Number,
+        value: 399.00,
+        notify: true
+      },
+
+      /**
+       * link to the product details
+       */
+      link: {
+        type: String,
+        value: 'http://www.zealoptics.com/en/shop/goggles/summit-series/eclipse/',
+        notify: true
+      }
+
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+      // `ready` is called after all elements have been configured, but
+      // propagates bottom-up. This element's children are ready, but parents
+      // are not.
+      //
+      // This is the point where you should make modifications to the DOM (when
+      // necessary), or kick off any processes the element wants to perform.
+    },
+
+    attached: function() {
+      // `attached` fires once the element and its parents have been inserted
+      // into a document.
+      //
+      // This is a good place to perform any work related to your element's
+      // visual state or active behavior (measuring sizes, beginning animations,
+      // loading resources, etc).
+    },
+
+    detached: function() {
+      // The analog to `attached`, `detached` fires when the element has been
+      // removed from a document.
+      //
+      // Use this to clean up anything you did in `attached`.
+    },
+
+    // Element Behavior
+
+    /**
+     * The `zeal-product-lasers` event is fired whenever `fireLasers` is called.
+     *
+     * @event zeal-product-lasers
+     * @detail {{sound: String}}
+     */
+
+    /**
+     * Sometimes it's just nice to say hi.
+     *
+     * @param {string} greeting A positive greeting.
+     * @return {string} The full greeting.
+     */
+    sayHello: function(greeting) {
+      var response = greeting || 'Hello World!';
+      return 'zeal-product says, ' + response;
+    },
+
+    /**
+     * Attempt to destroy this element's enemies with a beam of light!
+     *
+     * Or, at least, dispatch an event in the vain hope that someone else will
+     * do the zapping.
+     */
+    fireLasers: function() {
+      this.fire('zeal-product-lasers', {sound: 'Pew pew!'});
+    }
+
+  });
+
+</script>

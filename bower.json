@@ -1,0 +1,34 @@
+{
+  "name": "zeal-product",
+  "version": "1.0.0",
+  "authors": [
+    "Max Leitch <mleitch@zealoptics.com>"
+  ],
+  "description": "An element to display a product.",
+  "keywords": [
+    "web-component",
+    "ecommerce",
+    "zeal",
+    "polymer",
+    "seed"
+  ],
+  "main": "zeal-product.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/mauijim/zeal-product/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.1.0",
+    "iron-image": "PolymerElements/iron-image#~1.0.4",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.2.2",
+    "iron-media-query": "PolymerElements/iron-media-query#~1.0.8",
+    "zeal-styles": "latest",
+    "zeal-button": "latest"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}
